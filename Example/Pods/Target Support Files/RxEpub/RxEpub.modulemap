@@ -1,0 +1,6 @@
+framework module RxEpub {
+  umbrella header "RxEpub-umbrella.h"
+
+  export *
+  module * { export * }
+}
