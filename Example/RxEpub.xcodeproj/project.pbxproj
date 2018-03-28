@@ -14,6 +14,7 @@
 		607FACE01AFB9204008FA782 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 607FACDE1AFB9204008FA782 /* LaunchScreen.xib */; };
 		607FACEC1AFB9204008FA782 /* Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607FACEB1AFB9204008FA782 /* Tests.swift */; };
 		7D0C4F8B16E009449436914C /* Pods_RxEpub_Example.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC315036EB2506691B9231C5 /* Pods_RxEpub_Example.framework */; };
+		885865AC2069E9000027CE4C /* 恰到好处的幸福.epub in Resources */ = {isa = PBXBuildFile; fileRef = 885865AB2069E9000027CE4C /* 恰到好处的幸福.epub */; };
 		8BFC6F6A4093666AA90D96A5 /* Pods_RxEpub_Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8AFB3B0956653E49207351A1 /* Pods_RxEpub_Tests.framework */; };
 /* End PBXBuildFile section */
 
@@ -44,6 +45,7 @@
 		6A3C25C1D4313D68E0062DC6 /* Pods-RxEpub_Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RxEpub_Tests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-RxEpub_Tests/Pods-RxEpub_Tests.debug.xcconfig"; sourceTree = "<group>"; };
 		7816FBBB018FAE21D3AA70E6 /* Pods-RxEpub_Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RxEpub_Tests.release.xcconfig"; path = "Pods/Target Support Files/Pods-RxEpub_Tests/Pods-RxEpub_Tests.release.xcconfig"; sourceTree = "<group>"; };
 		8804391ED28B8E8565D3AE89 /* RxEpub.podspec */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = RxEpub.podspec; path = ../RxEpub.podspec; sourceTree = "<group>"; };
+		885865AB2069E9000027CE4C /* 恰到好处的幸福.epub */ = {isa = PBXFileReference; lastKnownFileType = file; path = "恰到好处的幸福.epub"; sourceTree = "<group>"; };
 		8AFB3B0956653E49207351A1 /* Pods_RxEpub_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_RxEpub_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		DA2D8D38AA2B7CAA68B7A772 /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
 		FC315036EB2506691B9231C5 /* Pods_RxEpub_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_RxEpub_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -95,6 +97,7 @@
 			children = (
 				607FACD51AFB9204008FA782 /* AppDelegate.swift */,
 				607FACD71AFB9204008FA782 /* ViewController.swift */,
+				885865AB2069E9000027CE4C /* 恰到好处的幸福.epub */,
 				607FACD91AFB9204008FA782 /* Main.storyboard */,
 				607FACDC1AFB9204008FA782 /* Images.xcassets */,
 				607FACDE1AFB9204008FA782 /* LaunchScreen.xib */,
@@ -246,6 +249,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				885865AC2069E9000027CE4C /* 恰到好处的幸福.epub in Resources */,
 				607FACDB1AFB9204008FA782 /* Main.storyboard in Resources */,
 				607FACE01AFB9204008FA782 /* LaunchScreen.xib in Resources */,
 				607FACDD1AFB9204008FA782 /* Images.xcassets in Resources */,
