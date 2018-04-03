@@ -4,7 +4,6 @@ inhibit_all_warnings!
 
 target 'RxEpub_Example' do
   pod 'RxEpub', :path => '../'
-
   target 'RxEpub_Tests' do
     inherit! :search_paths
 

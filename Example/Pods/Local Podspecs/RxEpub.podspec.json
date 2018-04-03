@@ -25,21 +25,27 @@
   ],
   "libraries": "z",
   "dependencies": {
-    "SSZipArchive": [
-      "2.1.1"
-    ],
-    "Alamofire": [
-
-    ],
     "RxSwift": [
 
     ],
     "RxCocoa": [
 
-    ],
-    "AEXML": [
-      "4.2.2"
     ]
   },
-  "frameworks": "UIKit"
+  "frameworks": "UIKit",
+  "subspecs": [
+    {
+      "name": "RxEpubPaser",
+      "source_files": "RxEpub/Source/RxEpubPaser/**/*",
+      "public_header_files": "RxEpub/Source/RxEpubPaser/**/*.h",
+      "dependencies": {
+        "SSZipArchive": [
+          "2.1.1"
+        ],
+        "AEXML": [
+          "4.2.2"
+        ]
+      }
+    }
+  ]
 }

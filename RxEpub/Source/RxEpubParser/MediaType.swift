@@ -83,7 +83,7 @@ extension MediaType {
                 return mediatype
             }
         }
-        let ext = (fileName as? NSString)?.pathExtension ?? ""
+        let ext = (fileName as NSString?)?.pathExtension ?? ""
         return MediaType(name: name, defaultExtension: ext)
     }
 
@@ -107,7 +107,7 @@ extension MediaType {
      Gets the MediaType based on the file extension.
      */
     static func determineMediaType(_ fileName: String) -> MediaType? {
-        let ext = (fileName as? NSString)?.pathExtension ?? ""
+        let ext = (fileName as NSString).pathExtension
 
         for mediatype in mediatypes {
             if mediatype.defaultExtension == ext {
