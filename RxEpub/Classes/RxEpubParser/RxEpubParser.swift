@@ -10,6 +10,7 @@ import RxSwift
 import AEXML
 import SSZipArchive
 public class RxEpubParser: NSObject {
+    
     private var rootUrl:URL!
     private let book = Book()
     private var resourcesBaseUrl:URL!
@@ -24,12 +25,12 @@ public class RxEpubParser: NSObject {
             var isDir:ObjCBool = false
             if FileManager.default.fileExists(atPath: rootUrl.path, isDirectory: &isDir){
                 if isDir.boolValue == false{
-                    print("本地未解压")
+//                    print("本地未解压")
                     return unzip(from: rootUrl).flatMap({
                         return self.readContainer(rootUrl: $0)
                     })
                 }else{
-                    print("本地已解压")
+//                    print("本地已解压")
                     return readContainer(rootUrl: rootUrl)
                 }
             }else{
@@ -38,33 +39,33 @@ public class RxEpubParser: NSObject {
             }
         }else{//远程文件
             if rootUrl.pathExtension == "epub"{
-                print("远程未解压")
+//                print("远程未解压")
                 return download(url: rootUrl).flatMap({
                     self.unzip(from: $0)
                 }).flatMap{
                     self.readContainer(rootUrl: $0)
                 }
             }else{
-                print("远程已解压")
+//                print("远程已解压")
                 return readContainer(rootUrl: rootUrl)
             }
         }
     }
     
     private func unzip(from url: URL)->Observable<URL>{
-        print("解压：",url)
+//        print("解压：",url)
         let unzipFile = FileManager.default.urls(for: FileManager.SearchPathDirectory.cachesDirectory, in: FileManager.SearchPathDomainMask.userDomainMask).last!.appendingPathComponent("Epubs").appendingPathComponent(rootUrl.deletingPathExtension().lastPathComponent)
         
         if SSZipArchive.unzipFile(atPath: url.path, toDestination: unzipFile.path, delegate: nil){
-            print("解压成功:",unzipFile.path)
+//            print("解压成功:",unzipFile.path)
             try? FileManager.default.removeItem(at: url)
             return Observable.just(unzipFile)
         }
-        print("解压失败")
+//        print("解压失败")
         return Observable.error(ParseError.zip)
     }
     private func readContainer(rootUrl:URL)->Observable<Book>{
-        print("开始读取内容",rootUrl)
+//        print("开始读取内容",rootUrl)
         let containerPath = "META-INF/container.xml"
         let containerUrl = rootUrl.appendingPathComponent(containerPath)
         return read(url: containerUrl).flatMap {
@@ -81,20 +82,10 @@ public class RxEpubParser: NSObject {
                 self.parseToc(toc: toc)
                 return Observable.just(self.book)
             }.observeOn(MainScheduler.asyncInstance)
-            .do(onNext: {
-                print($0.name ?? "无标题","解析成功")
-            }, onError: {
-                print("解析失败",$0)
-            },onCompleted: {
-                print("完毕")
-            }, onSubscribe: {
-                print("onSubscribe")
-            }, onSubscribed: {
-                print("onSubscribed")
-            })
+        
     }
     private func download(url:URL)->Observable<URL>{
-        print("下载",url.absoluteString)
+//        print("下载",url.absoluteString)
         return Observable.create {[weak self] (observer) -> Disposable in
             let task = URLSession.shared.downloadTask(with: url){ (localUrl, response, err) in
                 if let localUrl = localUrl{
@@ -118,7 +109,7 @@ public class RxEpubParser: NSObject {
     }
     @discardableResult
     private func read(url:URL) ->Observable<AEXMLDocument>{
-        print("读取文件:",url)
+//        print("读取文件:",url)
         return Observable.create { (observer) -> Disposable in
             if url.isFileURL{//本地文件
                 if !FileManager.default.fileExists(atPath: url.path){//文件不存在
@@ -150,7 +141,7 @@ public class RxEpubParser: NSObject {
     }
     @discardableResult
     private func parseContainer(container: AEXMLDocument) ->Observable<String>{
-        print("解析container")
+//        print("解析container")
         let opfResource = Resource()
         opfResource.href = container.root["rootfiles"]["rootfile"].attributes["full-path"]
         guard let fullPath = container.root["rootfiles"]["rootfile"].attributes["full-path"] else {
@@ -162,7 +153,7 @@ public class RxEpubParser: NSObject {
     }
     
     private func parseOpf(opf:AEXMLDocument)->Observable<URL>{
-        print("解析opf")
+//        print("解析opf")
         var identifier: String?
         if let package = opf.children.first {
             identifier = package.attributes["unique-identifier"]
@@ -172,19 +163,13 @@ public class RxEpubParser: NSObject {
             }
         }
         
-        // Read Spine
-        let spine = opf.root["spine"]
-        book.spine = readSpine(spine.children)
-        let tocItemIdref = spine.attributes["toc"]
         // Parse and save each "manifest item"
-        var tocHref:String? = nil
         opf.root["manifest"]["item"].all?.forEach {
             let resource = Resource()
             resource.id = $0.attributes["id"]
             
             resource.properties = $0.attributes["properties"]
             resource.href = $0.attributes["href"]
-            //TODO: - 类型待定,取决于用的时候用String还是URL
             resource.fullHref = resourcesBaseUrl.appendingPathComponent(resource.href).absoluteString.removingPercentEncoding
             resource.url = resourcesBaseUrl.appendingPathComponent(resource.href)
             resource.mediaType = MediaType.by(name: $0.attributes["media-type"] ?? "", fileName: resource.href)
@@ -194,13 +179,15 @@ public class RxEpubParser: NSObject {
             if (resource.mediaType != nil && resource.mediaType == .smil) {
                 readSmilFile(resource)
             }
-            //标记目录Item
-            if resource.id == tocItemIdref{
-                tocHref = resource.href
-                book.tocResource = resource
-            }
             book.resources.add(resource)
         }
+        // Read Spine
+        let spine = opf.root["spine"]
+        let tocItemIdref = spine.attributes["toc"]
+        
+        book.tocResource = book.resources.findById(tocItemIdref)
+        
+        book.spine = readSpine(spine.children)
         
         book.smils.baseUrl = resourcesBaseUrl
         
@@ -220,12 +207,9 @@ public class RxEpubParser: NSObject {
             book.coverImage = coverResource
         }
         
-        assert(book.tocResource != nil, "ERROR: 无法解析出目录路径")
-        
-        if let href = tocHref {
-            return Observable.just(resourcesBaseUrl.appendingPathComponent(href))
+        if let tocUrl = book.tocResource?.url {
+            return Observable.just(tocUrl)
         }else{
-            //此处不能报错，否则整体报错
             assertionFailure("获取目录路径失败")
             return Observable.just(resourcesBaseUrl.appendingPathComponent("toc.ncx"))
         }
@@ -236,7 +220,7 @@ public class RxEpubParser: NSObject {
     /// - Returns: A list of toc references
     @discardableResult
     private func parseToc(toc:AEXMLDocument) -> Observable<[TocReference]> {
-        print("解析toc")
+//        print("解析toc")
         var tableOfContent = [TocReference]()
         var tocItems: [AEXMLElement]?
         guard let tocResource = book.tocResource else {

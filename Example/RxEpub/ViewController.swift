@@ -9,29 +9,15 @@
 import UIKit
 import RxEpub
 import RxSwift
-import WebKit
-class ViewController: UIViewController {
-    let bag = DisposeBag()
-    let webView = WKWebView(frame: UIScreen.main.bounds)
+class ViewController: RxEpubPageController {
+//    let bag = DisposeBag()
+//    let webView = RxEpubWebView(frame:UIScreen.main.bounds)//RxEpubWebView(frame: CGRect(x: 30, y: 40, width: UIScreen.main.bounds.width - 60, height: UIScreen.main.bounds.height - 80))//
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.addSubview(webView)
-//        let url = URL(string:"http://d18.ixdzs.com/64/64960/64960.epub")
-        let url = URL(string:"http://mebookj.magook.com/epub1/14887/14887-330151/330151_08e3035f.epub")
-//        let url = URL(string:"http://d18.ixdzs.com/64/64960/64960.epub")
-//        let url = Bundle.main.url(forResource: "恰到好处的幸福", withExtension: "epub")
-//        let url =  URL(string:"http://mebookj.magook.com/epub1/14887/14887-330151/330151_08e3035f")
-//        let url = FileManager.default.urls(for: FileManager.SearchPathDirectory.cachesDirectory, in: .userDomainMask).first?.appendingPathComponent("Epubs").appendingPathComponent("恰到好处的幸福")
+//        view.backgroundColor = UIColor.white
+//        view.addSubview(webView)
 
-        RxEpubParser(url: url!).parse().subscribe(onNext: {[weak self] (book) in
-            if let url = book.resources.resources.first?.value.url{
-                let req = URLRequest(url: url)
-                self?.webView.load(req)
-            }
-        }, onError: { (err) in
-            print(err)
-        }).disposed(by: bag)
     }
-    
 }
 

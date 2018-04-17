@@ -11,7 +11,7 @@ import UIKit
 
 open class Book: NSObject {
     var metadata = Metadata()
-    var spine = Spine()
+    public var spine = Spine()
     var smils = Smils()
     var version: Double?
     

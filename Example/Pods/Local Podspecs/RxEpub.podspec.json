@@ -20,32 +20,26 @@
     "ios": "9.0"
   },
   "source_files": [
-    "RxEpub/Source/*.{h,swift}",
-    "RxEpub/Source/**/*.swift"
+    "RxEpub/Classes/*.{h,swift}",
+    "RxEpub/Classes/**/*.swift"
   ],
-  "libraries": "z",
+  "resources": [
+    "RxEpub/**/*.{js,css,jpg,png}",
+    "RxEpub/Assets/*.xcassets"
+  ],
   "dependencies": {
+    "SSZipArchive": [
+      "2.1.1"
+    ],
     "RxSwift": [
 
     ],
     "RxCocoa": [
 
+    ],
+    "AEXML": [
+      "4.2.2"
     ]
   },
-  "frameworks": "UIKit",
-  "subspecs": [
-    {
-      "name": "RxEpubPaser",
-      "source_files": "RxEpub/Source/RxEpubPaser/**/*",
-      "public_header_files": "RxEpub/Source/RxEpubPaser/**/*.h",
-      "dependencies": {
-        "SSZipArchive": [
-          "2.1.1"
-        ],
-        "AEXML": [
-          "4.2.2"
-        ]
-      }
-    }
-  ]
+  "frameworks": "UIKit"
 }

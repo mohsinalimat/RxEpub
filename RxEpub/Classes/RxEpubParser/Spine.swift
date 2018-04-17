@@ -8,9 +8,9 @@
 
 import UIKit
 
-class Spine: NSObject {
+public class Spine: NSObject {
     var pageProgressionDirection: String?
-    var spineReferences = [Resource]()
+    public var spineReferences = [Resource]()
 
     var isRtl: Bool {
         if let pageProgressionDirection = pageProgressionDirection , pageProgressionDirection == "rtl" {

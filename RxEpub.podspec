@@ -37,31 +37,37 @@ TODO: Add long description of the pod here.
   # s.requires_arc  = true
 
   s.source_files = [
-    'RxEpub/Source/*.{h,swift}',
-    'RxEpub/Source/**/*.swift',
+    'RxEpub/Classes/*.{h,swift}',
+    'RxEpub/Classes/**/*.swift',
   ]
-
+  s.resources = [
+    'RxEpub/**/*.{js,css,jpg,png}',
+    'RxEpub/Assets/*.xcassets'
+  ]
+  # s.resource_bundles = {
+  #   'RxEpub' => ['RxEpub/Assets/*']
+  # }
   # s.public_header_files = 'Pod/Source/**/*.h'
 
-  s.subspec 'RxEpubPaser' do |rxEpubPaser|
-      rxEpubPaser.source_files = 'RxEpub/Source/RxEpubPaser/**/*'
-      rxEpubPaser.public_header_files = 'RxEpub/Source/RxEpubPaser/**/*.h'
-      rxEpubPaser.dependency 'SSZipArchive', '2.1.1'
-      rxEpubPaser.dependency 'AEXML', '4.2.2'
-  end
+  # s.subspec 'RxEpubPaser' do |rxEpubPaser|
+  #     rxEpubPaser.source_files = 'RxEpub/Source/RxEpubPaser/**/*'
+  #     rxEpubPaser.public_header_files = 'RxEpub/Source/RxEpubPaser/**/*.h'
+  #     rxEpubPaser.dependency 'SSZipArchive', '2.1.1'
+  #     rxEpubPaser.dependency 'AEXML', '4.2.2'
+  # end
 
   # s.subspec 'RxEpubReader' do |rxEpubReader|
       # rxEpubReader.source_files = 'RxEpub/Source/RxEpubReader/**/*'
       # rxEpubReader.public_header_files = 'RxEpub/Source/RxEpubReader/**/*.h'
   # end
 
-  s.libraries  = "z"
-  # s.dependency 'SSZipArchive', '2.1.1'
+  # s.libraries  = "z"
+  s.dependency 'SSZipArchive', '2.1.1'
   s.dependency 'RxSwift'
   s.dependency 'RxCocoa'
   # s.dependency 'MenuItemKit', '3.0.0'
   # s.dependency 'ZFDragableModalTransition', '0.6'
-  # s.dependency 'AEXML', '4.2.2'
+  s.dependency 'AEXML', '4.2.2'
   # s.dependency 'FontBlaster', '4.0.1'
   # s.dependency 'JSQWebViewController', '6.0.0'
   # s.dependency 'RealmSwift', '3.1.1'

@@ -1,0 +1,99 @@
+
+* {
+    margin: 0;
+    vertical-align: baseline;
+    page-break-before: initial !important;
+    -webkit-user-select: text;
+}
+#RxEpub_Header{
+    height:50px;
+    -webkit-column-span:all;
+}
+
+/* ePUB */
+html {
+    -webkit-text-size-adjust: none; /* Never autoresize text */
+    padding: 0 0 !important;
+/*    overflow: hidden;*/
+/*    height:100%;*/
+/*    background-color:red;*/
+/*    background-image:url('羊皮纸.jpg');*/
+/*        background-size: 100% 812px;*/
+/*    background-repeat:repeat-y;*/
+}
+
+body {
+    padding: 0px 30px !important;
+/*    overflow: hidden !important;*/
+/*    background-image:url(羊皮纸.jpg);*/
+/*        background-size: 100% 812px;*/
+/*    background-repeat:repeat-y;*/
+/*    background-color:blue;*/
+}
+p, span, div {
+    font-size: 1em;
+    line-height: 1.5 !important;
+    text-align: justify !important;
+}
+img, svg, audio, video {
+    max-height: 95% !important;
+    max-width: 100% !important;
+    box-sizing: border-box;
+    object-fit: contain;
+    page-break-inside: avoid;
+}
+img { -webkit-user-select: none; }
+
+a {
+    text-decoration:none;
+    outline:0 none;
+    -webkit-touch-callout: none;
+    pointer-events:none;
+    cursor:default；
+} /* Disable link callback */
+
+p {
+    margin: 1.3em 0 1.5em 0;
+    line-height: 1.40em !important;
+    text-indent: 1.25em;
+}
+h1 ,h2 ,h3 ,h4 ,h5 ,h6 {
+    text-align: -webkit-auto;
+    text-rendering: optimizelegibility;
+    line-height: 1.2;
+}
+a, h1, h2, h3, h4, h5, h6 {
+    word-break: break-word !important;
+    -webkit-hyphens: none !important;
+}
+
+div { max-width: 100%; }
+highlight {
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+}
+
+h1 {
+    font-size: 2em;
+}
+h2 {
+    font-size: 1.5em;
+}
+h3 {
+    font-size: 1.17em;
+}
+h4 {
+    font-size: 1em;
+}
+h5 {
+    font-size: 0.83em;
+}
+h6 {
+    font-size: 0.67em;
+}
+body {
+    word-break: break-word !important;
+    -webkit-hyphens: auto !important;
+    hyphens: auto !important;
+}
+
