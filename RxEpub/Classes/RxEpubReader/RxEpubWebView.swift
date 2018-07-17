@@ -8,9 +8,11 @@
 import UIKit
 import WebKit
 public class RxEpubWebView: WKWebView {
+    var tapCallBack:(()->())? = nil
+    let indicator = UIActivityIndicatorView(activityIndicatorStyle: UIActivityIndicatorViewStyle.gray)
     public convenience init(frame:CGRect = UIScreen.main.bounds) {
-        let jsFileURL = Bundle(for: RxEpubReader.self).url(forResource: "Bridge", withExtension: "js")!
-        let cssFileURL = Bundle(for: RxEpubReader.self).url(forResource: "Style", withExtension: "css")!
+//        let jsFileURL = Bundle(for: RxEpubReader.self).url(forResource: "Bridge", withExtension: "js")!
+//        let cssFileURL = Bundle(for: RxEpubReader.self).url(forResource: "Style", withExtension: "css")!
         let js = """
         var meta = document.createElement('meta');
         meta.setAttribute('name', 'viewport');
@@ -40,7 +42,7 @@ public class RxEpubWebView: WKWebView {
         controller.addUserScript(uerScript)
         let config = WKWebViewConfiguration()
         config.userContentController = controller
-//        config.preferences.setValue(true, forKey: "allowFileAccessFromFileURLs")
+        config.preferences.setValue(true, forKey: "allowFileAccessFromFileURLs")
         config.allowsInlineMediaPlayback = true
         config.preferences.javaScriptEnabled = true
 //        config.preferences.minimumFontSize = 15
@@ -59,12 +61,29 @@ public class RxEpubWebView: WKWebView {
         scrollView.bounces = false
         scrollView.showsVerticalScrollIndicator = false
         scrollView.showsHorizontalScrollIndicator = false
+        scrollView.backgroundColor = UIColor.clear
         if #available(iOS 11, *) {
             scrollView.contentInsetAdjustmentBehavior = .never
         } else {
             
         }
+        indicator.hidesWhenStopped = true
+        addSubview(indicator)
+//        let tapgs = UITapGestureRecognizer(target: self, action: #selector(click))
+//        tapgs.numberOfTapsRequired = 1
+//        tapgs.delegate = self
+//        addGestureRecognizer(tapgs)
     }
+    
+    @objc private func click(){
+        tapCallBack?()
+    }
+    
+    public override func layoutSubviews() {
+        super.layoutSubviews()
+        indicator.center = self.center
+    }
+    
     public override init(frame: CGRect, configuration: WKWebViewConfiguration) {
         super.init(frame: frame, configuration: configuration)
     }
@@ -72,8 +91,23 @@ public class RxEpubWebView: WKWebView {
     required public init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    public override func load(_ request: URLRequest) -> WKNavigation? {
+        indicator.startAnimating()
+        return super.load(request)
+    }
 }
+//extension RxEpubWebView:UIGestureRecognizerDelegate{
+//    public func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldReceive touch: UITouch) -> Bool {
+//        return true
+//    }
+//    public func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
+//        return true
+//    }
+//}
 extension RxEpubWebView:WKUIDelegate,WKNavigationDelegate{
+    public func webView(_ webView: WKWebView, didStartProvisionalNavigation navigation: WKNavigation!) {
+        
+    }
     //Alert弹框
     public func webView(_ webView: WKWebView, runJavaScriptAlertPanelWithMessage message: String, initiatedByFrame frame: WKFrameInfo, completionHandler: @escaping () -> Void) {
         let alert = UIAlertController(title: "温馨提示", message: message, preferredStyle: UIAlertControllerStyle.alert)
@@ -118,19 +152,22 @@ extension RxEpubWebView:WKUIDelegate,WKNavigationDelegate{
     }
     public func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
         addCss()
-        if RxEpubConfig.default.scrollDirection == .right {
+        if RxEpubReader.shared.scrollDirection == .right {
             scrollsToBottom()
         }else{
             scrollsToTop()
         }
+        indicator.stopAnimating()
     }
     func addCss(){
-        evaluateJavaScript("addCSS('html','color:#444444')", completionHandler: nil)
-        evaluateJavaScript("addCSS('a','color:#444444')", completionHandler: nil)
+
         evaluateJavaScript("addCSS('html','height: \(frame.size.height-30)px; -webkit-column-gap: 0px; -webkit-column-width: \(frame.size.width)px;')", completionHandler: nil)
-        let url = Bundle(for: RxEpubReader.self).url(forResource: "羊皮纸", withExtension: "jpg")!
-        
-        evaluateJavaScript("addCSS('html','background-image:url(App://RxEpub/羊皮纸.jpg);background-size: 100% \(frame.size.height)px;')")
+        evaluateJavaScript("addCSS('html','font-size:\(RxEpubReader.shared.config.fontSize.value * 4.0/3.0)px')", completionHandler: nil)
+        evaluateJavaScript("addCSS('html','color:\(RxEpubReader.shared.config.textColor.value)')", completionHandler: nil)
+        evaluateJavaScript("addCSS('a','color:\(RxEpubReader.shared.config.textColor.value)')", completionHandler: nil)
+        if let imageName = RxEpubReader.shared.config.backgroundImage.value {
+            evaluateJavaScript("addCSS('html','background-image:url(App://RxEpub/\(imageName).jpg);background-size: 100% \(frame.size.height)px;')")
+        }
     }
     
     func scrollsToBottom(){

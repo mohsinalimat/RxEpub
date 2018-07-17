@@ -35,7 +35,7 @@ TODO: Add long description of the pod here.
   s.swift_version = '4.0'
   s.ios.deployment_target = '9.0'
   # s.requires_arc  = true
-
+  s.authors = { 'izhoubin' => '121160492@qq.com' }
   s.source_files = [
     'RxEpub/Classes/*.{h,swift}',
     'RxEpub/Classes/**/*.swift',

@@ -9,8 +9,11 @@ import UIKit
 
 class RxEpubPageCell: UICollectionViewCell {
     let webView = RxEpubWebView()
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
+        backgroundColor = UIColor.clear
+        contentView.backgroundColor = UIColor.clear
         contentView.addSubview(webView)
         webView.translatesAutoresizingMaskIntoConstraints = false
         let left = NSLayoutConstraint(item: webView, attribute: NSLayoutAttribute.left, relatedBy: NSLayoutRelation.equal, toItem: contentView, attribute: NSLayoutAttribute.left, multiplier: 1, constant: 0)
@@ -19,7 +22,6 @@ class RxEpubPageCell: UICollectionViewCell {
         let bottom = NSLayoutConstraint(item: webView, attribute: NSLayoutAttribute.bottom, relatedBy: NSLayoutRelation.equal, toItem: contentView, attribute: NSLayoutAttribute.bottom, multiplier: 1, constant: 0)
         contentView.addConstraints([left,right,top,bottom])
     }
-    
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }

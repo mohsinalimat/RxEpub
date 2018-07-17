@@ -1,27 +1,21 @@
 PODS:
   - AEXML (4.2.2)
-  - Nimble (7.0.3)
-  - Quick (1.2.0)
-  - RxCocoa (4.1.2):
+  - RxCocoa (4.2.0):
     - RxSwift (~> 4.0)
   - RxEpub (0.0.1):
     - AEXML (= 4.2.2)
     - RxCocoa
     - RxSwift
     - SSZipArchive (= 2.1.1)
-  - RxSwift (4.1.2)
+  - RxSwift (4.2.0)
   - SSZipArchive (2.1.1)
 
 DEPENDENCIES:
-  - Nimble (~> 7.0.2)
-  - Quick (~> 1.2.0)
   - RxEpub (from `../`)
 
 SPEC REPOS:
   https://github.com/CocoaPods/Specs.git:
     - AEXML
-    - Nimble
-    - Quick
     - RxCocoa
     - RxSwift
     - SSZipArchive
@@ -32,13 +26,11 @@ EXTERNAL SOURCES:
 
 SPEC CHECKSUMS:
   AEXML: 5ebafc1b75e0bcf0f1b09b8ca8fed2d5a199479b
-  Nimble: 7f5a9c447a33002645a071bddafbfb24ea70e0ac
-  Quick: 58d203b1c5e27fff7229c4c1ae445ad7069a7a08
-  RxCocoa: d88ba0f1f6abf040011a9eb4b539324fc426843a
+  RxCocoa: 0b54909c902e1e581212a03e690bbd94032d8baa
   RxEpub: 0348965a87350ff21f825c7a3c94c6767901865b
-  RxSwift: e49536837d9901277638493ea537394d4b55f570
+  RxSwift: 99e10317ddfcc7fbe01356aafd118fde4a0be104
   SSZipArchive: 14401ade5f8e82aba1ff03e9f88e9de60937ae60
 
-PODFILE CHECKSUM: e509344f0dce7d7cc33f86257c59432a8fd991fd
+PODFILE CHECKSUM: df3ba8842587b9fa9aefe5208a9dab1a17c69d60
 
-COCOAPODS: 1.5.0.beta.1
+COCOAPODS: 1.5.0

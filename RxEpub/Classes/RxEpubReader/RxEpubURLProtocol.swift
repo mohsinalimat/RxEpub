@@ -6,18 +6,17 @@
 //
 
 import UIKit
-let KHybridNSURLProtocolHKey = "KHybridNSURLProtocol"
+private let KHybridNSURLProtocolHKey = "KHybridNSURLProtocol"
 class RxEpubURLProtocol: URLProtocol,URLSessionDelegate,URLSessionDataDelegate,URLSessionTaskDelegate {
     var rxTask: URLSessionTask? = nil
     override class func canInit(with request: URLRequest) -> Bool{
-        print("收到请求:",request.url?.absoluteString ?? "")
-        if request.url?.host == "RxEpub"{
+        if request.url?.scheme?.lowercased() == "app",
+            request.url?.host == "RxEpub"{
             if URLProtocol.property(forKey: KHybridNSURLProtocolHKey, in: request) != nil{
                 return false
             }
             return true
         }
-        
         return false
     }
     override class func canonicalRequest(for request: URLRequest) -> URLRequest{

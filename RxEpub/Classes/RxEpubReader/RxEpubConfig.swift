@@ -8,14 +8,9 @@
 import UIKit
 import RxCocoa
 import RxSwift
-class RxEpubConfig: NSObject {
-    var scrollDirection:ScrollDirection = .none
-    let lastPage:Variable<Page> = Variable(Page(chapter:0,page:0))
-    let nextPage:Variable<Page> = Variable(Page(chapter:0,page:0))
-    let currentPage:Variable<Page> = Variable(Page(chapter:0,page:0))
-    
-    static let config = RxEpubConfig()
-    static var `default`:RxEpubConfig{
-        return config
-    }
+public class RxEpubConfig: NSObject {
+    public let backgroundColor = Variable("#cce8cf")
+    public let textColor = Variable("#818181")
+    public let fontSize:Variable<CGFloat> = Variable(14)
+    public let backgroundImage:Variable<String?> = Variable(nil)
 }
