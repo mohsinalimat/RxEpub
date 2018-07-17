@@ -85,8 +85,7 @@ public class RxEpubParser: NSObject {
         
     }
     private func download(url:URL)->Observable<URL>{
-//        print("下载",url.absoluteString)
-        return Observable.create {[weak self] (observer) -> Disposable in
+        return Observable.create {(observer) -> Disposable in
             let task = URLSession.shared.downloadTask(with: url){ (localUrl, response, err) in
                 if let localUrl = localUrl{
                     let dest = FileManager.default.urls(for: FileManager.SearchPathDirectory.cachesDirectory, in: FileManager.SearchPathDomainMask.userDomainMask).first!.appendingPathComponent("Epubs").appendingPathComponent(url.lastPathComponent)

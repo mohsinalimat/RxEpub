@@ -9,7 +9,7 @@
 Pod::Spec.new do |s|
   s.name             = 'RxEpub'
   s.version          = '0.0.1'
-  s.summary          = 'A short description of RxEpub.'
+  s.summary          = 'Epub paser and reader based on RxSwift'
 
 # This description is used to generate tags and improve search results.
 #   * Think: What does it do? Why did you write it? What is the focus?
@@ -18,7 +18,7 @@ Pod::Spec.new do |s|
 #   * Finally, don't worry about the indent, CocoaPods strips it!
 
   s.description      = <<-DESC
-TODO: Add long description of the pod here.
+  'Epub paser and reader based on RxSwift'
                        DESC
 
   s.homepage         = 'https://github.com/izhoubin/RxEpub'
@@ -62,14 +62,9 @@ TODO: Add long description of the pod here.
   # end
 
   # s.libraries  = "z"
-  s.dependency 'SSZipArchive', '2.1.1'
+  s.dependency 'SSZipArchive'
   s.dependency 'RxSwift'
   s.dependency 'RxCocoa'
-  # s.dependency 'MenuItemKit', '3.0.0'
-  # s.dependency 'ZFDragableModalTransition', '0.6'
-  s.dependency 'AEXML', '4.2.2'
-  # s.dependency 'FontBlaster', '4.0.1'
-  # s.dependency 'JSQWebViewController', '6.0.0'
-  # s.dependency 'RealmSwift', '3.1.1'
+  s.dependency 'AEXML'
   s.frameworks = 'UIKit'
 end

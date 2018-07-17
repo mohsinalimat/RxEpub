@@ -91,6 +91,7 @@ public class RxEpubWebView: WKWebView {
     required public init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    @discardableResult
     public override func load(_ request: URLRequest) -> WKNavigation? {
         indicator.startAnimating()
         return super.load(request)

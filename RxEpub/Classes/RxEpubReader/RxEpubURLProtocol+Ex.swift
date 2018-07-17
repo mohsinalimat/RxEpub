@@ -18,17 +18,17 @@ extension URLProtocol {
         return NSSelectorFromString("unregisterSchemeForCustomProtocol:")
     }
     class func wk_register(scheme:String){
-        let cls = contextControllerClass()
+        let cls:AnyClass = contextControllerClass()
         let sel = registerSchemeSelector()
         if cls.responds(to: sel) {
-            (cls as AnyObject).perform(sel, with: scheme)
+            _ = (cls as AnyObject).perform(sel, with: scheme)
         }
     }
     class func wk_unregister(scheme:String){
-        let cls = contextControllerClass()
+        let cls:AnyClass = contextControllerClass()
         let sel = unregisterSchemeSelector()
         if cls.responds(to: sel) {
-            (cls as AnyObject).perform(sel, with: scheme)
+            _ = (cls as AnyObject).perform(sel, with: scheme)
         }
     }
 }
