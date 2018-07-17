@@ -1,6 +1,6 @@
 # RxEpub
 
-[![CI Status](http://img.shields.io/travis/izhoubin/RxEpub.svg?style=flat)](https://travis-ci.org/izhoubin/RxEpub)
+![CI Status](http://img.shields.io/travis/izhoubin/RxEpub.svg?style=flat)
 [![Version](https://img.shields.io/cocoapods/v/RxEpub.svg?style=flat)](http://cocoapods.org/pods/RxEpub)
 [![License](https://img.shields.io/cocoapods/l/RxEpub.svg?style=flat)](http://cocoapods.org/pods/RxEpub)
 [![Platform](https://img.shields.io/cocoapods/p/RxEpub.svg?style=flat)](http://cocoapods.org/pods/RxEpub)
@@ -26,4 +26,4 @@ izhoubin, 121160492@qq.com
 
 ## License
 
-RxEpub is available under the MIT license. See the LICENSE file for more info.
+RxEpub is available under the MIT license. See the [LICENSE](/LICENSE) file for more info.

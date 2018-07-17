@@ -23,7 +23,7 @@ Pod::Spec.new do |s|
 
   s.homepage         = 'https://github.com/izhoubin/RxEpub'
   # s.screenshots     = 'www.example.com/screenshots_1', 'www.example.com/screenshots_2'
-  s.license          = { :type => 'MIT'}
+  s.license          = { :type => 'MIT', :file => 'LICENSE' }
   s.author           = { 'izhoubin' => '121160492@qq.com' }
   s.source           = { :git => 'https://github.com/izhoubin/RxEpub.git', :tag => s.version.to_s }
   # s.social_media_url = 'https://twitter.com/<TWITTER_USERNAME>'
